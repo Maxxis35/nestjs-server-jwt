@@ -24,7 +24,7 @@ export class AuthService {
         const authUserDto = new AuthDto(user);
         const tokens = await this.generateTokens({...authUserDto});
         await this.updateRefreshToken(user._id, tokens.refresh_token);
-        return {user: authUserDto, tokens};
+        return {...tokens, user: authUserDto};
     }
 
     async singUp(newUserDto: CreateUserDto): Promise<any> {
@@ -38,7 +38,7 @@ export class AuthService {
         const authUserDto = new AuthDto(user);
         const tokens = await this.generateTokens({...authUserDto});
         await this.updateRefreshToken(user._id, tokens.refresh_token);
-        return {user: authUserDto, tokens};
+        return {...tokens, user: authUserDto};
     }
 
     async logout (userId: string): Promise<any> {
@@ -58,14 +58,14 @@ export class AuthService {
         const authUserDto = new AuthDto(user);
         const tokens = await this.generateTokens({...authUserDto});
         await this.updateRefreshToken(user._id, tokens.refresh_token);
-        return {user: authUserDto, tokens};
+        return {...tokens, user: authUserDto};
     }
 
     private async generateTokens(payload) {
         const access_token = await this.jwtService.signAsync(payload,
-            {secret: process.env.JWT_ACCESS_SECRET, expiresIn: '1h'});
+            {secret: process.env.JWT_ACCESS_SECRET, expiresIn: process.env.JWT_ACCESS_EXPIRATION});
         const refresh_token = await this.jwtService.signAsync(payload,
-            {secret: process.env.JWT_REFRESH_SECRET, expiresIn: '1h'});
+            {secret: process.env.JWT_REFRESH_SECRET, expiresIn: process.env.JWT_REFRESH_EXPIRATION});
         return {access_token, refresh_token}
     }
 

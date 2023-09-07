@@ -1,12 +1,12 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import * as cookieParser from 'cookie-parser';
 import {DocumentBuilder, SwaggerModule} from "@nestjs/swagger";
+import * as cookieParser from 'cookie-parser';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.enableCors({credentials: true, origin: true});
   app.use(cookieParser());
+  app.enableCors({credentials: true, origin: true});
 
   const config = new DocumentBuilder()
       .setTitle('Concerts ConcertAppServer API')
