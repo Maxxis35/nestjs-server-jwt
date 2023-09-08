@@ -5,6 +5,7 @@ import {JwtModule} from "@nestjs/jwt";
 import {AccessTokenStrategy} from "./strategies/accessToken.strategy";
 import {RefreshTokenStrategy} from "./strategies/refreshToken.strategy";
 import {UsersModule} from "../users/users.module";
+import {ConcertsModule} from "../concerts/concerts.module";
 
 @Module({
   imports: [forwardRef(()=> UsersModule),

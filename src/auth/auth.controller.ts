@@ -4,9 +4,11 @@ import {CreateUserDto} from "../users/dto/create-user.dto";
 import {Request, response} from 'express'
 import {AccessTokenGuard} from "./guard/accessToken.guard";
 import {RefreshTokenGuard} from "./guard/refreshToken.guard";
+import {ApiTags} from "@nestjs/swagger";
 
 
 @Controller('auth')
+@ApiTags('Auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
