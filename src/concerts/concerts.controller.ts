@@ -5,7 +5,6 @@ import {Concert} from "./concert.schema";
 import {UpdateConcertDto} from "./dto/update-concert.dtp";
 import {ApiBearerAuth, ApiOperation, ApiResponse, ApiTags} from "@nestjs/swagger";
 import {AccessTokenGuard} from "../auth/guard/accessToken.guard";
-import {User} from "../users/user.schema";
 
 @Controller('concerts')
 @ApiTags('Concerts')
@@ -14,16 +13,17 @@ export class ConcertsController {
 
 
   @ApiBearerAuth()
+  @ApiResponse({ status: 201, description: 'The record has been successfully created.'})
   @UseGuards(AccessTokenGuard)
   @Post()
   create(@Body() createConcertDto: CreateConcertDto): Promise<Concert> {
     return this.concertsService.create(createConcertDto);
   }
 
-  @ApiBearerAuth()
+
   @ApiOperation({summary: 'Getting a list of concerts'})
   @ApiResponse({status: 200, type: [Concert]})
-  @UseGuards(AccessTokenGuard)
+  // @UseGuards(AccessTokenGuard)
   @Get()
   findAll(): Promise<Concert[]> {
     return this.concertsService.findAll();
@@ -33,7 +33,7 @@ export class ConcertsController {
   @UseGuards(AccessTokenGuard)
   @Get(':id')
   findOne(@Param('id') id: string): Promise<Concert> {
-    return this.concertsService.findOne(+id);
+    return this.concertsService.findById(id);
   }
 
   @ApiBearerAuth()

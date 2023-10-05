@@ -8,13 +8,13 @@ export class CreateConcertDto {
     @ApiProperty({example: '', description: ''})
     readonly concertVenue: string;
     @ApiProperty({example: '', description: ''})
-    readonly solist: string;
+    readonly soloist: string;
     @ApiProperty({example: '', description: ''})
     readonly conductor: string;
     @ApiProperty({example: '', description: ''})
     readonly performer: string;
     @ApiProperty({example: '', description: ''})
-    readonly composition: string;
+    readonly compositions: string;
     @ApiProperty({example: '', description: ''})
     readonly note: string;
 }

@@ -9,18 +9,25 @@ export class Concert {
     @ApiProperty()
     @Prop({required: true})
     title: string;
+
     @Prop({required: true})
     date: string;
+
     @Prop()
     concertVenue: string;
+
     @Prop()
-    solist: string;
+    soloist: string;
+
     @Prop()
     conductor: string;
+
     @Prop()
     performer: string;
+
     @Prop()
-    composition: string;
+    compositions: string;
+
     @Prop()
     note: string;
 }

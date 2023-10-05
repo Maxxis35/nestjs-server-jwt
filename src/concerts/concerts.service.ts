@@ -14,7 +14,11 @@ export class ConcertsService {
         return this.concertModel.find().exec();
     }
 
-    async findOne(id: number): Promise<Concert> {
+    // async findRange(skip: number, limit: number): Promise<Concert[]> {
+    //     return this.concertModel.find().skip(skip).limit(limit);
+    // }
+
+    async findById(id: string): Promise<Concert> {
         return this.concertModel.findById(id);
     }
 

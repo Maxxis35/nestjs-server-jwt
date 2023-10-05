@@ -11,16 +11,16 @@ import {AccessTokenGuard} from "../auth/guard/accessToken.guard";
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @ApiBearerAuth()
+  // @ApiBearerAuth()
   @ApiOperation({summary: 'Getting a list of users'})
   @ApiResponse({status: 200, type: [User]})
-  @UseGuards(AccessTokenGuard)
+  // @UseGuards(AccessTokenGuard)
   @Get()
   findAll(): Promise<User[]> {
     return this.usersService.findAll();
   }
 
-  @ApiBearerAuth()
+  // @ApiBearerAuth()
   @ApiOperation({summary: 'Getting a user by id'})
   @ApiResponse({status: 200, type: User})
   @Get(':id')
