@@ -23,7 +23,8 @@ export class ConcertsController {
 
   @ApiOperation({summary: 'Getting a list of concerts'})
   @ApiResponse({status: 200, type: [Concert]})
-  // @UseGuards(AccessTokenGuard)
+  @ApiBearerAuth()
+  @UseGuards(AccessTokenGuard)
   @Get()
   findAll(): Promise<Concert[]> {
     return this.concertsService.findAll();

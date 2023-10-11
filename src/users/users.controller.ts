@@ -1,4 +1,4 @@
-import {Body, Controller, Delete, Get, Param, Patch, Post, UseGuards} from '@nestjs/common';
+import {Body, Controller, Delete, Get, Param, Patch, Post, Res, UseGuards} from '@nestjs/common';
 import { UsersService } from './users.service';
 import {ApiBearerAuth, ApiOperation, ApiResponse, ApiTags} from "@nestjs/swagger";
 import {User} from "./user.schema";
@@ -11,16 +11,16 @@ import {AccessTokenGuard} from "../auth/guard/accessToken.guard";
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  // @ApiBearerAuth()
+  @ApiBearerAuth()
   @ApiOperation({summary: 'Getting a list of users'})
   @ApiResponse({status: 200, type: [User]})
-  // @UseGuards(AccessTokenGuard)
+  @UseGuards(AccessTokenGuard)
   @Get()
   findAll(): Promise<User[]> {
     return this.usersService.findAll();
   }
 
-  // @ApiBearerAuth()
+  @ApiBearerAuth()
   @ApiOperation({summary: 'Getting a user by id'})
   @ApiResponse({status: 200, type: User})
   @Get(':id')
@@ -28,13 +28,13 @@ export class UsersController {
     return this.usersService.findOneById(id);
   }
 
-  @ApiBearerAuth()
-  @ApiOperation({summary: 'Create user'})
-  @ApiResponse({status: 200, type: User})
-  @Post()
-  create(@Body() createUserDto: CreateUserDto): Promise<User> {
-    return this.usersService.create(createUserDto);
-  }
+  // @ApiBearerAuth()
+  // @ApiOperation({summary: 'Create user'})
+  // @ApiResponse({status: 200, type: User})
+  // @Post()
+  // create(@Body() createUserDto: CreateUserDto): Promise<User> {
+  //   return this.usersService.create(createUserDto);
+  // }
 
   @ApiBearerAuth()
   @ApiOperation({summary: 'Change user with id'})
