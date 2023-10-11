@@ -1,10 +1,10 @@
 import {Body, Controller, Get, Post, Req, Res, UseGuards} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import {CreateUserDto} from "../users/dto/create-user.dto";
-import {Request, response} from 'express'
+import {Request,} from 'express'
 import {AccessTokenGuard} from "./guard/accessToken.guard";
 import {RefreshTokenGuard} from "./guard/refreshToken.guard";
-import {ApiTags} from "@nestjs/swagger";
+import {ApiBearerAuth, ApiTags} from "@nestjs/swagger";
 
 
 @Controller('auth')
@@ -20,6 +20,8 @@ export class AuthController {
     return tokens;
   }
 
+  @ApiBearerAuth()
+  @UseGuards(AccessTokenGuard)
   @Post('singup')
   async singup(@Body() singUpDto: CreateUserDto, @Res({passthrough: true}) res,) {
     const tokens = await this.authService.singUp(singUpDto)
@@ -28,6 +30,7 @@ export class AuthController {
     return tokens;
   }
 
+  @ApiBearerAuth()
   @UseGuards(AccessTokenGuard)
   @Get('logout')
   logout(@Req() req: Request, @Res({passthrough: true}) res,){
@@ -35,6 +38,7 @@ export class AuthController {
     res.clearCookie('refreshToken');
   }
 
+  @ApiBearerAuth()
   @UseGuards(RefreshTokenGuard)
   @Get('refresh')
   async refreshTokens(@Req() req: Request, @Res({passthrough: true}) res,) {
