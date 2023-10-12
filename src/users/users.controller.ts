@@ -28,13 +28,13 @@ export class UsersController {
     return this.usersService.findOneById(id);
   }
 
-  // @ApiBearerAuth()
-  // @ApiOperation({summary: 'Create user'})
-  // @ApiResponse({status: 200, type: User})
-  // @Post()
-  // create(@Body() createUserDto: CreateUserDto): Promise<User> {
-  //   return this.usersService.create(createUserDto);
-  // }
+  @ApiBearerAuth()
+  @ApiOperation({summary: 'Create user'})
+  @ApiResponse({status: 200, type: User})
+  @Post()
+  create(@Body() createUserDto: CreateUserDto): Promise<User> {
+    return this.usersService.singUp(createUserDto);
+  }
 
   @ApiBearerAuth()
   @ApiOperation({summary: 'Change user with id'})
